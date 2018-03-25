@@ -12,8 +12,8 @@ namespace Sudoku
     class Obsluga_Plikow 
     {
         public int[,] tab = new int[9, 9];
-        public string bufor { get; private set; }
-        static string Konwertuj(int[,] tabb)
+        public string buffer_text { get; private set; }
+        static string Covertion(int[,] tabb)
         {
             string StringTab = "";
             for (int i = 0; i < 9; i++)
@@ -52,9 +52,9 @@ namespace Sudoku
                 if (path.EndsWith(".txt"))
                 {
                     FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-                    byte[] odczyt = new byte[81];
-                    fs.Read(odczyt, 0, odczyt.Length);
-                    bufor = System.Text.Encoding.Default.GetString(odczyt);
+                    byte[] read = new byte[81];
+                    fs.Read(read, 0, read.Length);
+                    buffer_text = System.Text.Encoding.Default.GetString(read);
                     fs.Close();
                     return true;
                 }
@@ -66,7 +66,7 @@ namespace Sudoku
             }
         }
 
-        public void save_file(string path, int[,] tablica)
+        public void save_file(string path, int[,] array)
         {
             if (!Directory.Exists(path)) System.Windows.MessageBox.Show("Directory does not exist");
             else
@@ -83,8 +83,8 @@ namespace Sudoku
                     }
                 }
                 FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
-                byte[] zapis = Encoding.ASCII.GetBytes(Konwertuj(tablica));
-                fs.Write(zapis, 0, 81);
+                byte[] save = Encoding.ASCII.GetBytes(Covertion(array));
+                fs.Write(save, 0, 81);
                 fs.Close();
             }
         }

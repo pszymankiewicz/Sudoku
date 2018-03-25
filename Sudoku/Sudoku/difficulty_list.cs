@@ -12,7 +12,6 @@ namespace Sudoku
         public static List<string> combo = new List<string>();
         public void Fill_Combo(ComboBox difficulty)
         {
-            //combo.Add("Choose difficulty");
             combo.Add("Easy");
             combo.Add("Medium");
             combo.Add("Hard");
@@ -20,7 +19,6 @@ namespace Sudoku
             {
                 difficulty.Items.Add(a);
             }
-            //difficulty.SelectedIndex = 0;
         }
     }
 }

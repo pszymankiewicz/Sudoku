@@ -10,15 +10,15 @@ namespace Sudoku
     class Solver : Checker
     {
         Random rnd = new Random();
-        int bufor;
+        int buffer;
         List<int> list = new List<int>();
         int[] vector = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        int licznik = 0, licznik2 = 0;
+        int counter = 0, counter2 = 0;
         bool goingBack = false;
 
         public int[,] Solve(int[,] tab, int[,] buffer, int Row, int Column)
         {
-            licznik = licznik2;
+            counter = counter2;
             if (buffer[Row, Column] != 0)
             {
                 if (!goingBack)
@@ -31,13 +31,13 @@ namespace Sudoku
                 }
                 else if (Column == 0 && Row != 0)
                 {
-                    licznik2 = Array.IndexOf(vector, tab[Row - 1, 8]) + 1;
+                    counter2 = Array.IndexOf(vector, tab[Row - 1, 8]) + 1;
 
                     Solve(tab, buffer, Row - 1, 8);
                 }
                 else if (Column != 0)
                 {
-                    licznik2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
+                    counter2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
                     Solve(tab, buffer, Row, Column - 1);
                 }
             }
@@ -46,16 +46,16 @@ namespace Sudoku
                 goingBack = false;
                 if (Row < 9 && Column < 9)
                 {
-                    while (licznik < 9)
+                    while (counter < 9)
                     {
-                        if (Check(Row, Column, tab, vector[licznik]))
+                        if (Check(Row, Column, tab, vector[counter]))
                         {
-                            tab[Row, Column] = vector[licznik];
+                            tab[Row, Column] = vector[counter];
                             break;
                         }
                         else
                         {
-                            licznik++;
+                            counter++;
                         }
                     }
                 }
@@ -63,29 +63,29 @@ namespace Sudoku
                 {
                     return tab;
                 }
-                if (Column != 8 && licznik < 9)
+                if (Column != 8 && counter < 9)
                 {
-                    licznik2 = 0;
+                    counter2 = 0;
                     Solve(tab, buffer, Row, Column + 1);
                 }
-                else if (Column != 0 && licznik == 9)
+                else if (Column != 0 && counter == 9)
                 {
-                    licznik2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
+                    counter2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
                     tab[Row, Column] = 0;
                     goingBack = true;
                     Solve(tab, buffer, Row, Column - 1);
                 }
-                else if (Column == 0 && licznik == 9)
+                else if (Column == 0 && counter == 9)
                 {
-                    licznik2 = Array.IndexOf(vector, tab[Row - 1, 8]) + 1;
+                    counter2 = Array.IndexOf(vector, tab[Row - 1, 8]) + 1;
                     tab[Row, Column] = 0;
                     goingBack = true;
                     Solve(tab, buffer, Row - 1, 8);
                 }
-                else if (Column == 8 && licznik < 9)
+                else if (Column == 8 && counter < 9)
                 {
-                    licznik2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
-                    licznik2 = 0;
+                    counter2 = Array.IndexOf(vector, tab[Row, Column - 1]) + 1;
+                    counter2 = 0;
                     Solve(tab, buffer, Row + 1, 0);
                 }
             }
@@ -99,12 +99,12 @@ namespace Sudoku
             {
                 while (Row != 9)
                 {
-                    bufor = list[0];
-                    if (Check(Row, Column, tab, bufor))
+                    buffer = list[0];
+                    if (Check(Row, Column, tab, buffer))
                     {
-                        tab[Row, Column] = bufor;
+                        tab[Row, Column] = buffer;
                         Row++;
-                        list.Remove(bufor);
+                        list.Remove(buffer);
                     }
                     else
                     {
@@ -148,11 +148,11 @@ namespace Sudoku
             }
         }
 
-        public void ListClear(List<int> lista)
+        public void ListClear(List<int> list)
         {
-            for (int i = 0; i < lista.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                lista.Remove(lista[i]);
+                list.Remove(list[i]);
             }
         }
 

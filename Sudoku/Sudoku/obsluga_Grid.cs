@@ -203,7 +203,7 @@ namespace Sudoku
             }
         }
 
-        public void GenerateExt(Grid ext, Grid sudoku, int[,] buffer)
+        public void FromExt(Grid ext, Grid sudoku, int[,] buffer)
         {
             int j = 0, k = 0;
             for (int i = 0; i < ext.Children.Count; i++)
@@ -242,15 +242,15 @@ namespace Sudoku
             }
         }
 
-        public void GenerateFile(Grid sudoku, int[,] buffer, string bufor)
+        public void FromFile(Grid sudoku, int[,] buffer, string bufor)
         {
-            int licznik = 0;
+            int counter = 0;
             for (int i = 0; i < 9; i++)
             {
                 for(int l=0; l<9; l++)
                 {
-                    buffer[i, l] = int.Parse(bufor[licznik].ToString());
-                    licznik++;
+                    buffer[i, l] = int.Parse(bufor[counter].ToString());
+                    counter++;
                 }
             }
             int j = 0, k = 0;
