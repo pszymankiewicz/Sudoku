@@ -14,14 +14,12 @@ using System.Windows.Shapes;
 
 namespace Sudoku
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Wczytywanie.xaml
-    /// </summary>
+
     public partial class Wczytywanie : Window
     {
         int[,] buffer, tab;
-        Grid siatka;
-        public Wczytywanie(Grid siatka, int[,] buffer, int[,] tab)
+        Grid grid;
+        public Wczytywanie(Grid grid, int[,] buffer, int[,] tab)
         {
             InitializeComponent();
             button_cancel.Content = opisyElementowGUI.cancel;
@@ -29,7 +27,7 @@ namespace Sudoku
             button_file.Content = opisyElementowGUI.file;
             label_choose.Content = opisyElementowGUI.choose;
             button_cancel.IsCancel = true;
-            this.siatka = siatka;
+            this.grid = grid;
             this.buffer = buffer;
             this.tab = tab;
         }
@@ -41,14 +39,14 @@ namespace Sudoku
 
         private void button_file_Click(object sender, RoutedEventArgs e)
         {
-            Zapis wczytywanie = new Zapis(siatka, buffer, tab);
-            wczytywanie.Show();
+            Zapis load = new Zapis(grid, buffer, tab);
+            load.Show();
             this.Close();
         }
 
         private void button_external_Click(object sender, RoutedEventArgs e)
         {
-            External ext = new External(siatka, buffer, tab);
+            External ext = new External(grid, buffer, tab);
             ext.Show();
             this.Close();
         }

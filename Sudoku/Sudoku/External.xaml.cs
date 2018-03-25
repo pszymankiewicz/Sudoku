@@ -18,7 +18,7 @@ namespace Sudoku
     public partial class External : Window
     {
         plansza pns = new plansza();
-        Grid siatka = new Grid();
+        Grid grid = new Grid();
         Solver solver = new Solver();
         Grid sudoku;
         int[,] buffer, tab;
@@ -32,11 +32,11 @@ namespace Sudoku
             backgrd.ColumnDefinitions.Add(new ColumnDefinition());
             backgrd.RowDefinitions.Add(new RowDefinition());
             backgrd.RowDefinitions.Add(new RowDefinition());
-            pns.Rysuj(siatka);
-            Grid.SetColumn(siatka, 1);
-            Grid.SetRow(siatka, 0);
-            Grid.SetRowSpan(siatka, 2);
-            backgrd.Children.Add(siatka);
+            pns.Draw(grid);
+            Grid.SetColumn(grid, 1);
+            Grid.SetRow(grid, 0);
+            Grid.SetRowSpan(grid, 2);
+            backgrd.Children.Add(grid);
             nr1.Content = opisyElementowGUI.one;
             nr2.Content = opisyElementowGUI.two;
             nr3.Content = opisyElementowGUI.three;
@@ -59,7 +59,7 @@ namespace Sudoku
 
         private void button_save_Click(object sender, RoutedEventArgs e)
         {
-            pns.GenerateExt(siatka, sudoku, buffer);
+            pns.FromExt(grid, sudoku, buffer);
             solver.Put_in(tab, buffer);
             tab = solver.Solve(tab, buffer, 0, 0);
             this.Close();
@@ -72,7 +72,7 @@ namespace Sudoku
                 Button number = sender as Button;
                 pns.active.Content = number.Content;
                 int Row, Column, Number;
-                pns.ButtonContent(siatka, pns.active, buffer, out Row, out Column, out Number);
+                pns.ButtonContent(grid, pns.active, buffer, out Row, out Column, out Number);
                 pns.tab = buffer;
             }
         }

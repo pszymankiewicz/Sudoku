@@ -74,7 +74,7 @@ namespace Sudoku
                 {
                     try
                     {
-                        Plansza.GenerateFile(sudoku, buffer, obsluga.bufor);
+                        Plansza.FromFile(sudoku, buffer, obsluga.buffer_text);
                         for (int i = 0; i < 9; i++)
                             for (int j = 0; j < 9; j++)
                             {

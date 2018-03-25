@@ -33,7 +33,7 @@ namespace Sudoku
         public MainWindow()
         {
             InitializeComponent();
-            Plansza.Rysuj(siatka);
+            Plansza.Draw(siatka);
             nr1.Content = opisyElementowGUI.one;
             nr2.Content = opisyElementowGUI.two;
             nr3.Content = opisyElementowGUI.three;

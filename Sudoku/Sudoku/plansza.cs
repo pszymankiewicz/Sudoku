@@ -11,8 +11,7 @@ namespace Sudoku
 {
     class plansza : obsluga_Grid
     {
-        public int[,] tab = new int[9, 9];
-        public void Rysuj(Grid element)
+        public void Draw(Grid element)
         {
             for (int i = 0; i < 9; i++)
             {
@@ -52,14 +51,14 @@ namespace Sudoku
 
                 }
             }
-            Border ramka = new Border();
-            ramka.BorderThickness = new Thickness(4);
-            ramka.BorderBrush = Brushes.Black;
-            Grid.SetColumn(ramka, 0);
-            Grid.SetRow(ramka, 0);
-            Grid.SetRowSpan(ramka, 9);
-            Grid.SetColumnSpan(ramka, 9);
-            element.Children.Add(ramka);
+            Border edges = new Border();
+            edges.BorderThickness = new Thickness(4);
+            edges.BorderBrush = Brushes.Black;
+            Grid.SetColumn(edges, 0);
+            Grid.SetRow(edges, 0);
+            Grid.SetRowSpan(edges, 9);
+            Grid.SetColumnSpan(edges, 9);
+            element.Children.Add(edges);
         }
         
         
