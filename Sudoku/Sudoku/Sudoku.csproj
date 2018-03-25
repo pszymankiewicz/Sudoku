@@ -59,14 +59,14 @@
     <Compile Include="External.xaml.cs">
       <DependentUpon>External.xaml</DependentUpon>
     </Compile>
-    <Compile Include="obsluga_Grid.cs" />
-    <Compile Include="Obsluga_Plikow.cs" />
+    <Compile Include="GridSupport.cs" />
+    <Compile Include="FileServices.cs" />
     <Compile Include="Solver.cs" />
-    <Compile Include="Wczytywanie.xaml.cs">
-      <DependentUpon>Wczytywanie.xaml</DependentUpon>
+    <Compile Include="Load.xaml.cs">
+      <DependentUpon>Load.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Zapis.xaml.cs">
-      <DependentUpon>Zapis.xaml</DependentUpon>
+    <Compile Include="Save.xaml.cs">
+      <DependentUpon>Save.xaml</DependentUpon>
     </Compile>
     <Page Include="External.xaml">
       <SubType>Designer</SubType>
@@ -80,23 +80,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="difficulty_list.cs" />
+    <Compile Include="DifficultyList.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Wczytywanie.xaml">
+    <Page Include="Load.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Zapis.xaml">
+    <Page Include="Save.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="opisyElementowGUI.cs" />
-    <Compile Include="plansza.cs" />
+    <Compile Include="GUIElementsDescryptions.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

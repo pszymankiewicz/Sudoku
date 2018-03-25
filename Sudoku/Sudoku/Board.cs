@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace Sudoku
 {
-    class plansza : obsluga_Grid
+    class Board : GridSupport
     {
         public void Draw(Grid element)
         {

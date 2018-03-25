@@ -16,33 +16,33 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public partial class Zapis : Window
+    public partial class Save : Window
     {
         public int[,] tab = new int[9, 9];
-        Obsluga_Plikow obsluga = new Obsluga_Plikow();
+        FileServices file_Services = new FileServices();
         Grid sudoku;
         int[,] buffer;
-        plansza Plansza = new plansza();
+        Board Board = new Board();
         Solver solver = new Solver();
 
-        public Zapis(Grid sudoku, int[,] buffer, int[,] tab)
+        public Save(Grid sudoku, int[,] buffer, int[,] tab)
         {
             InitializeComponent();
-            button_browse.Content = opisyElementowGUI.browse;
-            button_cancel.Content = opisyElementowGUI.cancel;
+            button_browse.Content = GUIElementsDescriptions.browse;
+            button_cancel.Content = GUIElementsDescriptions.cancel;
             button_cancel.IsCancel = true;
-            button_saved.Content = opisyElementowGUI.load;
+            button_saved.Content = GUIElementsDescriptions.load;
             textBox_destination.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             this.sudoku = sudoku;
             this.buffer = buffer;
             this.tab = tab;
         }
-        public Zapis(int[,] tab)
+        public Save(int[,] tab)
         {
             InitializeComponent();
-            button_browse.Content = opisyElementowGUI.browse;
-            button_cancel.Content = opisyElementowGUI.cancel;
-            button_saved.Content = opisyElementowGUI.save;
+            button_browse.Content = GUIElementsDescriptions.browse;
+            button_cancel.Content = GUIElementsDescriptions.cancel;
+            button_saved.Content = GUIElementsDescriptions.save;
             button_cancel.IsCancel = true;
             textBox_destination.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             this.tab = tab;
@@ -55,26 +55,26 @@ namespace Sudoku
 
         private void button_browse_Click(object sender, RoutedEventArgs e)
         {
-            if (button_saved.Content.ToString() == opisyElementowGUI.load)
+            if (button_saved.Content.ToString() == GUIElementsDescriptions.load)
             {
-                textBox_destination.Text = obsluga.choose_file();
+                textBox_destination.Text = file_Services.choose_file();
             }
-            else if(button_saved.Content.ToString()==opisyElementowGUI.save)
+            else if(button_saved.Content.ToString()==GUIElementsDescriptions.save)
             {
-                textBox_destination.Text = obsluga.choose_folder();
+                textBox_destination.Text = file_Services.choose_folder();
             }
         }
 
         private void button_saved_Click(object sender, RoutedEventArgs e)
         {
             bool valid = true;
-            if (button_saved.Content.ToString() == opisyElementowGUI.load)
+            if (button_saved.Content.ToString() == GUIElementsDescriptions.load)
             {
-                if (obsluga.load_file(textBox_destination.Text))
+                if (file_Services.load_file(textBox_destination.Text))
                 {
                     try
                     {
-                        Plansza.FromFile(sudoku, buffer, obsluga.buffer_text);
+                        Board.FromFile(sudoku, buffer, file_Services.buffer_text);
                         for (int i = 0; i < 9; i++)
                             for (int j = 0; j < 9; j++)
                             {
@@ -83,7 +83,7 @@ namespace Sudoku
                                     if (!solver.Check(i, j, buffer, buffer[i, j]))
                                     {
                                         valid = false;
-                                        Plansza.Hard_Clear(sudoku, buffer);
+                                        Board.Hard_Clear(sudoku, buffer);
                                         System.Windows.MessageBox.Show("Invalid input file");
                                     }
                                 }
@@ -101,9 +101,9 @@ namespace Sudoku
                     }
                 }
             }
-            else if (button_saved.Content.ToString() == opisyElementowGUI.save)
+            else if (button_saved.Content.ToString() == GUIElementsDescriptions.save)
             {
-                obsluga.save_file(textBox_destination.Text, tab);
+                file_Services.save_file(textBox_destination.Text, tab);
                 this.Close();
 
             }

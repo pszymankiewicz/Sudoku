@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Sudoku
 {
-    class obsluga_Grid
+    class GridSupport
     {
         public int[,] tab = new int[9, 9];
         public Button active;

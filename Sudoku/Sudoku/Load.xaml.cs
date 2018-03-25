@@ -15,17 +15,17 @@ using System.Windows.Shapes;
 namespace Sudoku
 {
 
-    public partial class Wczytywanie : Window
+    public partial class Load : Window
     {
         int[,] buffer, tab;
         Grid grid;
-        public Wczytywanie(Grid grid, int[,] buffer, int[,] tab)
+        public Load(Grid grid, int[,] buffer, int[,] tab)
         {
             InitializeComponent();
-            button_cancel.Content = opisyElementowGUI.cancel;
-            button_external.Content = opisyElementowGUI.external;
-            button_file.Content = opisyElementowGUI.file;
-            label_choose.Content = opisyElementowGUI.choose;
+            button_cancel.Content = GUIElementsDescriptions.cancel;
+            button_external.Content = GUIElementsDescriptions.external;
+            button_file.Content = GUIElementsDescriptions.file;
+            label_choose.Content = GUIElementsDescriptions.choose;
             button_cancel.IsCancel = true;
             this.grid = grid;
             this.buffer = buffer;
@@ -39,7 +39,7 @@ namespace Sudoku
 
         private void button_file_Click(object sender, RoutedEventArgs e)
         {
-            Zapis load = new Zapis(grid, buffer, tab);
+            Save load = new Save(grid, buffer, tab);
             load.Show();
             this.Close();
         }

@@ -22,84 +22,84 @@ namespace Sudoku
     public partial class MainWindow : Window
     {
 
-        plansza Plansza = new plansza();
+        Board board = new Board();
         public int[,] tab = new int[9, 9];
         public int[,] tab_alt = new int[9, 9];
         public int[,] buffer = new int[9, 9];
         Solver solver = new Solver();
-        difficulty_list list = new difficulty_list();
+        DifficultyList list = new DifficultyList();
         int differences = 0;
 
         public MainWindow()
         {
             InitializeComponent();
-            Plansza.Draw(siatka);
-            nr1.Content = opisyElementowGUI.one;
-            nr2.Content = opisyElementowGUI.two;
-            nr3.Content = opisyElementowGUI.three;
-            nr4.Content = opisyElementowGUI.four;
-            nr5.Content = opisyElementowGUI.five;
-            nr6.Content = opisyElementowGUI.six;
-            nr7.Content = opisyElementowGUI.seven;
-            nr8.Content = opisyElementowGUI.eight;
-            nr9.Content = opisyElementowGUI.nine;
-            button_clear.Content = opisyElementowGUI.clear;
-            button_save.Content = opisyElementowGUI.save;
-            button_load.Content = opisyElementowGUI.load;
-            button_hint.Content = opisyElementowGUI.hint;
-            combo_difficulty.Text = opisyElementowGUI.difficulty;
+            board.Draw(siatka);
+            nr1.Content = GUIElementsDescriptions.one;
+            nr2.Content = GUIElementsDescriptions.two;
+            nr3.Content = GUIElementsDescriptions.three;
+            nr4.Content = GUIElementsDescriptions.four;
+            nr5.Content = GUIElementsDescriptions.five;
+            nr6.Content = GUIElementsDescriptions.six;
+            nr7.Content = GUIElementsDescriptions.seven;
+            nr8.Content = GUIElementsDescriptions.eight;
+            nr9.Content = GUIElementsDescriptions.nine;
+            button_clear.Content = GUIElementsDescriptions.clear;
+            button_save.Content = GUIElementsDescriptions.save;
+            button_load.Content = GUIElementsDescriptions.load;
+            button_hint.Content = GUIElementsDescriptions.hint;
+            combo_difficulty.Text = GUIElementsDescriptions.difficulty;
             list.Fill_Combo(combo_difficulty);
-            button_print.Content = opisyElementowGUI.print;
+            button_print.Content = GUIElementsDescriptions.print;
             tab=solver.Solve_Empty(tab, 0, 0);
         }
 
         private void button_save_Click(object sender, RoutedEventArgs e)
         {
-            Zapis zapis = new Zapis(buffer);
+            Save zapis = new Save(buffer);
             zapis.Show();
         }
 
         private void button_load_Click(object sender, RoutedEventArgs e)
         {
-            Plansza.Hard_Clear(siatka, buffer);
-            Wczytywanie wczytaj = new Wczytywanie(siatka, buffer, tab);
+            board.Hard_Clear(siatka, buffer);
+            Load wczytaj = new Load(siatka, buffer, tab);
             wczytaj.Show();
         }
 
         private void button_print_Click(object sender, RoutedEventArgs e)
         {
-            Plansza.ToPrint(siatka);
+            board.ToPrint(siatka);
             var pd = new PrintDialog();
             Size printSize = new Size(pd.PrintableAreaWidth, pd.PrintableAreaHeight);
             siatka.Measure(printSize);
             siatka.Arrange(new Rect(printSize));
             pd.PrintVisual(siatka, "Sudoku");
             this.Width = this.Width + 1;
-            Plansza.Restore(siatka);
+            board.Restore(siatka);
         }
 
         private void button_nr_Click(object sender, RoutedEventArgs e)
         {
-            if (Plansza.active != null)
+            if (board.active != null)
             {
                 Button number = sender as Button;
-                Plansza.active.Content = number.Content;
+                board.active.Content = number.Content;
                 int Row, Column, Number;
-                Plansza.ButtonContent(siatka, Plansza.active, buffer, out Row, out Column, out Number);
+                board.ButtonContent(siatka, board.active, buffer, out Row, out Column, out Number);
                 if (!solver.Check(Row, Column, buffer, Number))
                 {
-                    Plansza.active.Opacity = 0.71;
-                    Plansza.active.Background = Brushes.Red;
+                    board.active.Opacity = 0.71;
+                    board.active.Background = Brushes.Red;
                 }
                 else
                 {
                     if (tab[Row, Column] != buffer[Row, Column]) differences++;
-                    Plansza.active.Opacity = 0.7;
-                    Plansza.active.Background = Brushes.Violet;
+                    board.active.Opacity = 0.7;
+                    board.active.Background = Brushes.Violet;
                 }
                 if (solver.IfWin(buffer))
                 {
-                    Plansza.Win(siatka);
+                    board.Win(siatka);
                     combo_difficulty.SelectedIndex = -1;
                 }   
                 if(differences>4)
@@ -117,15 +117,15 @@ namespace Sudoku
 
         private void button_clear_Click(object sender, RoutedEventArgs e)
         {
-            if(!solver.bufferEmpty(buffer)) Plansza.Clear(siatka, buffer);
+            if(!solver.bufferEmpty(buffer)) board.Clear(siatka, buffer);
         }
 
         private void combo_difficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (solver.IfWin(buffer)) solver.Solve_Empty(tab = new int[9, 9], 0, 0); 
             combo_difficulty.IsEditable = false;
-            Plansza.Hard_Clear(siatka, buffer);
-            Plansza.Fill(siatka, tab, combo_difficulty.SelectedIndex, buffer);
+            board.Hard_Clear(siatka, buffer);
+            board.Fill(siatka, tab, combo_difficulty.SelectedIndex, buffer);
 
         }
 
@@ -133,8 +133,8 @@ namespace Sudoku
         {
             if (!solver.bufferEmpty(buffer))
             {
-                Plansza.Hint(siatka, tab, buffer);
-                if (solver.IfWin(buffer)) Plansza.Win(siatka);
+                board.Hint(siatka, tab, buffer);
+                if (solver.IfWin(buffer)) board.Win(siatka);
             }
         }
     }

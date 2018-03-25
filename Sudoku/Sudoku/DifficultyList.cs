@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Sudoku
 {
-    class difficulty_list
+    class DifficultyList
     {
         public static List<string> combo = new List<string>();
         public void Fill_Combo(ComboBox difficulty)

@@ -17,7 +17,7 @@ namespace Sudoku
 
     public partial class External : Window
     {
-        plansza pns = new plansza();
+        Board pns = new Board();
         Grid grid = new Grid();
         Solver solver = new Solver();
         Grid sudoku;
@@ -37,18 +37,18 @@ namespace Sudoku
             Grid.SetRow(grid, 0);
             Grid.SetRowSpan(grid, 2);
             backgrd.Children.Add(grid);
-            nr1.Content = opisyElementowGUI.one;
-            nr2.Content = opisyElementowGUI.two;
-            nr3.Content = opisyElementowGUI.three;
-            nr4.Content = opisyElementowGUI.four;
-            nr5.Content = opisyElementowGUI.five;
-            nr6.Content = opisyElementowGUI.six;
-            nr7.Content = opisyElementowGUI.seven;
-            nr8.Content = opisyElementowGUI.eight;
-            nr9.Content = opisyElementowGUI.nine;
-            button_save.Content = opisyElementowGUI.save;
-            button_cancel.Content = opisyElementowGUI.cancel;
-            button_clear.Content = opisyElementowGUI.clear;
+            nr1.Content = GUIElementsDescriptions.one;
+            nr2.Content = GUIElementsDescriptions.two;
+            nr3.Content = GUIElementsDescriptions.three;
+            nr4.Content = GUIElementsDescriptions.four;
+            nr5.Content = GUIElementsDescriptions.five;
+            nr6.Content = GUIElementsDescriptions.six;
+            nr7.Content = GUIElementsDescriptions.seven;
+            nr8.Content = GUIElementsDescriptions.eight;
+            nr9.Content = GUIElementsDescriptions.nine;
+            button_save.Content = GUIElementsDescriptions.save;
+            button_cancel.Content = GUIElementsDescriptions.cancel;
+            button_clear.Content = GUIElementsDescriptions.clear;
             button_cancel.IsCancel = true;
         }
 

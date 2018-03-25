@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sudoku
 {
-    class opisyElementowGUI
+    class GUIElementsDescriptions
     {
         public static string one = "1";
         public static string two = "2";

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    class Obsluga_Plikow 
+    class FileServices 
     {
         public int[,] tab = new int[9, 9];
         public string buffer_text { get; private set; }
